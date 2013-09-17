@@ -526,7 +526,7 @@ class S3
 	* @return array | false
 	*/
 	public static function inputFile($file, $md5sum = true)
-	{var_dump($file);echo ' 123<hr>';
+	{
 		if (!file_exists($file) || !is_file($file) || !is_readable($file))
 		{
 			self::__triggerError('S3::inputFile(): Unable to open input file: '.$file, __FILE__, __LINE__);
