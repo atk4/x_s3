@@ -8,12 +8,18 @@
  */
 namespace x_s3;
 class Model_File extends \SQL_Model {
-    public $s3;
-    public $magic_file=null;
-    public $volume;
-    public $table='x_s3_file';
-    public $entity_filestore_type='x_s3\Type';
-    public $entity_filestore_volume='x_s3\Volume';
+    public $s3 = null;
+    public $volume = null;
+
+    public $table = 'x_s3_file';
+
+    public $entity_filestore_type = 'x_s3\Type';
+    public $entity_filestore_volume = 'x_s3\Volume';
+
+    public $magic_file = null; // path to magic database file used in finfo-open(), null = default
+    public $import_mode = null;
+    public $import_source = null;
+
     public $policy_add_new_type=false; // set this to true, will allow to upload all file types
     function init() {
         parent::init(); //$this->debug();
@@ -83,6 +89,7 @@ class Model_File extends \SQL_Model {
         return $this->s3->getFileUrl($this['bucket'],$this['filename']);
     }
     function getAvailableVolume() {
+        if (is_object($this->volume)) return $this->volume;
         $volume = $this->add('x_s3/Model_Volume')
                 ->addCondition('enabled',true)
                 ->setOrder('id',true)
@@ -179,12 +186,12 @@ class Model_File extends \SQL_Model {
 
     function getPath(){exit('getPath');
         $path =
-            $this->ref("filestore_volume_id")->get("dirname") . "/" .
+            $this->ref("x_s3_volume_id")->get("dirname") . "/" .
             $this['filename'];
         return $path;
     }
     function getMimeType(){exit('getMimeType');
-        return $this->ref('filestore_type_id')
+        return $this->ref('x_s3_type_id')
             ->get('mime_type');
     }
     function performImport(){
@@ -193,14 +200,12 @@ class Model_File extends \SQL_Model {
          */
         switch($this->import_mode){
         case'upload':
+        case'copy':
             if (!$this->volume) $this->getAvailableVolume();
             $this->s3->uploadFile($this->volume['bucket'],$this->import_source);
             $this['x_s3_volume_id'] = $this->volume->id;
             break;
         case'move':
-            throw $this->exception('Import mode '.$this->import_mode.' is not supported yet','Exception_File_NotSupportedImportMode');
-            break;
-        case'copy':
             throw $this->exception('Import mode '.$this->import_mode.' is not supported yet','Exception_File_NotSupportedImportMode');
             break;
         case'string':

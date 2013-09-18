@@ -95,19 +95,19 @@ class Controller_S3 extends \AbstractController {
     private function _fileExist($bucket,$file,$throw_exception) {
         $list = $this->getS3()->getBucket($bucket);
         if (array_key_exists($file,$list)) {
-            $this->checked_buckets[$bucket][$file] = 'exists';
+            $this->checked_files[$bucket][$file] = 'exists';
             if ($throw_exception) {
                 throw $this->exception('File with name "'.$file.'" already exist in bucket "'.$bucket.'"');
             }
             return true;
         }
-        $this->checked_buckets[$bucket][$file] = 'not_exists';
+        $this->checked_files[$bucket][$file] = 'not_exists';
         return false;
     }
     function fileExist($bucket,$file,$throw_exception=false) {
         $file = basename($file);
         if ($this->isFileChecked($bucket,$file)) {
-            if ($this->checked_buckets[$bucket][$file] == 'exists') {
+            if ($this->checked_files[$bucket][$file] == 'exists') {
                 if ($throw_exception) {
                     throw $this->exception('File with name "'.$file.'" already exist in bucket "'.$bucket.'"');
                 }
