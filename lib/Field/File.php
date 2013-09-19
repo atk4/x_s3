@@ -14,7 +14,7 @@ class Field_File extends \Field_Reference {
         $this->s3 = $this->add('x_s3/Controller_S3');
 
         $this->setModel($this->use_model,'url');
-        $this->display(array('form'=>'upload'));
+        $this->display(array('form'=>'x_s3\S3Upload'));
     }
     function displaytype($x){return $this;}
     function getModel(){

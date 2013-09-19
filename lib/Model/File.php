@@ -28,7 +28,9 @@ class Model_File extends \SQL_Model {
         $this->hasOne($this->entity_filestore_type,'x_s3_type_id',false)
             ->caption('File Type')
             ->mandatory(true)
-            ;
+        ;
+
+
         $this->hasOne($this->entity_filestore_volume,'x_s3_volume_id',false)
             ->caption('Volume')
             ->mandatory(true)
@@ -184,10 +186,8 @@ class Model_File extends \SQL_Model {
         return $this;
     }
 
-    function getPath(){exit('getPath');
-        $path =
-            $this->ref("x_s3_volume_id")->get("dirname") . "/" .
-            $this['filename'];
+    function getPath(){
+        $path = $this->s3->getFileUrl($this->ref("x_s3_volume_id")->get('bucket'),$this['filename']);
         return $path;
     }
     function getMimeType(){exit('getMimeType');

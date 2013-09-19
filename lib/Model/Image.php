@@ -132,7 +132,7 @@ class Model_Image extends Model_File {
     }
     function setMaxResize(){ exit('setMaxResize');
     }
-    function beforeDelete(){ exit('beforeDelete.0');
+    function beforeDelete(){ //exit('beforeDelete.0');
         parent::beforeDelete();
         $this->ref('thumb_file_id')->tryDelete();
     }
