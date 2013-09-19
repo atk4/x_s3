@@ -22,8 +22,6 @@ CREATE TABLE if not exists `x_s3_image` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE if not exists `x_s3_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
@@ -31,11 +29,9 @@ CREATE TABLE if not exists `x_s3_type` (
   `extension` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+
 CREATE TABLE `x_s3_volume` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `bucket` varchar(255) NOT NULL DEFAULT '',
@@ -45,7 +41,7 @@ CREATE TABLE `x_s3_volume` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `bucket` (`bucket`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
 
 
 
