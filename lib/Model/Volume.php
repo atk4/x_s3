@@ -6,7 +6,7 @@
  * Time: 1:06 PM
  * To change this template use File | Settings | File Templates.
  */
-namespace x_s3;
+namespace atk4\x_s3;
 class Model_Volume extends \SQL_Model {
     public $table='x_s3_volume';
     public $s3;
@@ -15,7 +15,7 @@ class Model_Volume extends \SQL_Model {
     public $max_quantity_per_volume = 4000;
 	function init(){
 		parent::init();
-        $this->s3 = $this->add('x_s3/Controller_S3');
+        $this->s3 = $this->add('atk4\x_s3/Controller_S3');
 
 		$this->addField('bucket')
 			->caption('Bucket Name')

@@ -6,7 +6,7 @@
  * Time: 8:51 PM
  * To change this template use File | Settings | File Templates.
  */
-namespace x_s3;
+namespace atk4\x_s3;
 class Model_Image extends Model_File {
     public $default_thumb_width=140;
     public $default_thumb_height=140;
@@ -15,7 +15,7 @@ class Model_Image extends Model_File {
     function init() {
         parent::init(); //$this->debug();
         $this->i = $this->join('x_s3_image.original_file_id');
-        $this->i->hasOne('x_s3/'.$this->entity_file,'thumb_file_id')
+        $this->i->hasOne('atk4\x_s3/'.$this->entity_file,'thumb_file_id')
             ->caption('Thumbnail');
 
         $this->addExpression('thumb_url')->set(array($this,'getThumbURLExpr'));
@@ -74,7 +74,7 @@ class Model_Image extends Model_File {
             file_put_contents($tempfile,$image->getImageBlob());
             $thumb['filename'] = baseName($tempfile);
 
-            $thumb->volume = $this->add('x_s3/Model_Volume')->load($thumb['x_s3_volume_id']);
+            $thumb->volume = $this->add('atk4\x_s3/Model_Volume')->load($thumb['x_s3_volume_id']);
 
             $this->s3->uploadFile($thumb->volume['bucket'],$tempfile);
         }

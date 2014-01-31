@@ -6,13 +6,13 @@
  * Time: 1:02 PM
  * To change this template use File | Settings | File Templates.
  */
-namespace x_s3;
+namespace atk4\x_s3;
 class Model_Type extends \SQL_Model {
     public $s3;
 	public $table='x_s3_type';
 	function init(){
 		parent::init();
-        $this->s3 = $this->add('x_s3/Controller_S3');
+        $this->s3 = $this->add('atk4\x_s3/Controller_S3');
 
 		$this->addField('name')
             ;

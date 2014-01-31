@@ -6,7 +6,7 @@
  * Time: 11:05 AM
  * To change this template use File | Settings | File Templates.
  */
-namespace x_s3;
+namespace atk4\x_s3;
 require_once __DIR__.'/../../vendor/s3/S3.php'; // https://github.com/tpyo/amazon-s3-php-class
 class Controller_S3 extends \AbstractController {
 

@@ -6,15 +6,15 @@
  * Time: 8:39 PM
  * To change this template use File | Settings | File Templates.
  */
-namespace x_s3;
+namespace atk4\x_s3;
 class Model_File extends \SQL_Model {
     public $s3 = null;
     public $volume = null;
 
     public $table = 'x_s3_file';
 
-    public $entity_filestore_type = 'x_s3\Type';
-    public $entity_filestore_volume = 'x_s3\Volume';
+    public $entity_filestore_type = 'atk4\x_s3\Type';
+    public $entity_filestore_volume = 'atk4\x_s3\Volume';
 
     public $magic_file = null; // path to magic database file used in finfo-open(), null = default
     public $import_mode = null;
@@ -23,7 +23,7 @@ class Model_File extends \SQL_Model {
     public $policy_add_new_type=false; // set this to true, will allow to upload all file types
     function init() {
         parent::init(); //$this->debug();
-        $this->s3 = $this->add('x_s3/Controller_S3');
+        $this->s3 = $this->add('atk4\x_s3/Controller_S3');
 
         $this->hasOne($this->entity_filestore_type,'x_s3_type_id',false)
             ->caption('File Type')
@@ -92,7 +92,7 @@ class Model_File extends \SQL_Model {
     }
     function getAvailableVolume() {
         if (is_object($this->volume)) return $this->volume;
-        $volume = $this->add('x_s3/Model_Volume')
+        $volume = $this->add('atk4\x_s3/Model_Volume')
                 ->addCondition('enabled',true)
                 ->setOrder('id',true)
                 ->tryLoadAny();

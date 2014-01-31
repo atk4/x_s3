@@ -5,9 +5,9 @@
  * Date: 9/14/13
  * Time: 12:12 PM
  */
-namespace x_s3;
+namespace atk4\x_s3;
 class Field_Image extends Field_File {
-    public $use_model = 'x_s3/Image';
+    public $use_model = 'atk4\x_s3/Image';
 
 
     /* Adds a calculated field for displaying a thumbnail of this image */
