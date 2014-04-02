@@ -11,7 +11,7 @@ class Model_Volume extends \SQL_Model {
     public $table='x_s3_volume';
     public $s3;
 
-    public $bucket_prefix = 'x_s3_';
+    public $bucket_prefix = 'volume_';
     public $max_quantity_per_volume = 4000;
 	function init(){
 		parent::init();
@@ -22,7 +22,7 @@ class Model_Volume extends \SQL_Model {
 			;
 		$this->addField('stored_files_cnt')
 			->type('int')
-			->defaultValue(0)
+			->defaultValue('0')
 			->caption('Files')
 			;
 		$this->addField('enabled')
