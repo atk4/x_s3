@@ -13,12 +13,12 @@ class Field_Image extends Field_File {
     /* Adds a calculated field for displaying a thumbnail of this image */
     function addThumb($name=null,$thumb='thumb_url'){
 
-//        if(!$name)$name=$this->getDereferenced().'_thumb';
-//
-//        $self=$this;
-//        $this->owner->addExpression($name)->set(function($m)use($self,$thumb){
-//            return $m->refSQL($self->short_name)->fieldQuery($thumb);
-//        });
+        if(!$name)$name=$this->getDereferenced().'_thumb';
+
+        $self=$this;
+        $this->owner->addExpression($name)->set(function($m)use($self,$thumb){
+            return $m->refSQL($self->short_name)->fieldQuery($thumb);
+        });
         return $this;
     }
 }
