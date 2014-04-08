@@ -57,7 +57,7 @@ class Model_Volume extends \SQL_Model {
         if (is_null($bucket)) {
             if ($this->loaded()) {
                 $bucket = $this['bucket'];
-            } else throw $this->exception('Not clear what busket you want to check','Exception_Volume_WhichBucket');
+            } else throw $this->exception('Not clear what bucket you want to check','Exception_Volume_WhichBucket');
         }
         return $this->s3->bucketExist($bucket,false);
     }
@@ -65,7 +65,7 @@ class Model_Volume extends \SQL_Model {
         if (is_null($bucket)) {
             if ($this->loaded()) {
                 $bucket = $this['bucket'];
-            } else throw $this->exception('Not clear what busket you want to check','Exception_Volume_WhichBucket');
+            } else throw $this->exception('Not clear what bucket you want to check','Exception_Volume_WhichBucket');
         }
         if (!$this->bucketExist($bucket)) {
             $this->createNew($bucket);
@@ -81,7 +81,7 @@ class Model_Volume extends \SQL_Model {
             $create_new = true;
             $bucket = uniqid($this->bucket_prefix);
         }
-        if (!$this->s3->getS3()->putBucket($bucket)) {
+        if (!$this->s3->getS3()->putBucket($bucket,self::ACL_PRIVATE,'Ireland')) {
             if ($throw_exception) {
                 throw $this->exception('Cannot create bucket','Exception_Volume_CannotCreate');
             }

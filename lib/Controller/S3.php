@@ -45,6 +45,9 @@ class Controller_S3 extends \AbstractController {
     }
 
     function getFileUrl($bucket,$filename) {
+        if (strpos($bucket,'volume_') === false) {
+            return 'http://nk-org-ua-upload.s3.amazonaws.com/'.$bucket.'/'.$filename;
+        }
         return 'http://'.$bucket.'.s3.amazonaws.com/'.$filename;
     }
 

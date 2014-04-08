@@ -92,7 +92,7 @@ class Model_File extends \SQL_Model {
     }
     function getAvailableVolume() {
         if (is_object($this->volume)) return $this->volume;
-        $volume = $this->add('atk4\x_s3/Model_Volume')
+        $volume = $this->add('atk4/x_s3/Model_Volume')
                 ->addCondition('enabled',true)
                 ->setOrder('id',true)
                 ->tryLoadAny();

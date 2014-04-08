@@ -25,6 +25,7 @@ class Model_Image extends Model_File {
     function getThumbURLExpr($m,$q){
         $t = $this->add($this->entity_file_model);
         $t->addCondition('id',$this->i->fieldExpr('thumb_file_id'));
+        //return $t->fieldQuery('filename');
         return $q->concat( 'http://', $t->fieldQuery('bucket'), ".s3.amazonaws.com/", $t->fieldQuery('filename') );
 
 //        $this->t = $this->i->join('x_s3_file.id','thumb_file_id');
